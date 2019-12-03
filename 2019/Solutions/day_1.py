@@ -1,5 +1,3 @@
-import os
-
 f = lambda mass: mass // 3 - 2
 
 def part_one():
