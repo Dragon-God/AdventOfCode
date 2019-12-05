@@ -6,6 +6,7 @@ def dist(p1: tuple, p2=(0, 0): tuple) -> int:
     """Calculates the Manhattan distance between two points"""
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
 
+
 def trace(step: str, pos: tuple) -> list:
     """Draws the line formed by applying a step (`step`) to a given coordinate (`pos`).
     
@@ -29,6 +30,7 @@ def trace(step: str, pos: tuple) -> list:
         line = [(x+i, y) for i in range(1, shift+1)]
     return line
 
+
 def draw(pos: tuple, path: list) -> list:
     """Draws the graph formed by following a sequence of steps (`path`) from a given starting position (`pos`)."""
     graph = []
@@ -37,6 +39,7 @@ def draw(pos: tuple, path: list) -> list:
         pos = line[-1]  # Update `pos`.
         graph += line
     return graph
+
 
 def intersect(paths: list) -> tuple:
     """Draws the graphs formed by following the two provided paths and finds their intersection.
@@ -52,6 +55,7 @@ def intersect(paths: list) -> tuple:
     graph_1, graph_2 = draw((0, 0), paths[0]), draw((0, 0), paths[1])
     crosses = set(graph_1) & set(graph_2)
     return crosses, graph_1, graph_2
+
 
 def reaches(paths: list) -> dict:
     """Finds the distance travelled by each wire to their various points of intersection.
@@ -75,6 +79,7 @@ def reaches(paths: list) -> dict:
 def part_one() -> int:
     """Finds minimum Manhattan distance from origin of the intersection points."""
     return min(dist(cross) for cross in intersect(wires)[0])
+
 
 def part_two() -> int:
     """Finds minimum distance travelled by the two wires to reach an intersection point."""

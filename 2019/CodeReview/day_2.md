@@ -123,6 +123,10 @@ def part_two():
             return 100 * noun + verb
 ```
   
+### Important
+
+To use the solution, call `part_one(test)` and `part_two()` for the solutions to Part One and Part Two of the problem respectively.
+
 ___
   
 ## Notes
