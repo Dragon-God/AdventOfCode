@@ -5,7 +5,7 @@ from statemachine import StateMachine, operators
 
 os.chdir(r"2019\Solutions")
 
-with open(r"../Inputs/day_5.txt") as file:
+with open(r"..\Inputs\day_5.txt") as file:
     program = [int(i) for i in file.read().split(",")]
 
 machine = StateMachine(operators, program)

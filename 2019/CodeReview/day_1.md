@@ -59,11 +59,11 @@ def partial_sum(mass):
 
 
 def part_one():
-    with open(r"../Inputs/day_1.txt") as file:
+    with open(r"..\Inputs\day_1.txt") as file:
         return sum(f(int(i)) for i in file.readlines())
 
 def part_two():
-    with open(r"../Inputs/day_1.txt") as file:
+    with open(r"..\Inputs\day_1.txt") as file:
         return sum(partial_sum(int(mass)) for mass in file.readlines())
 ```
   

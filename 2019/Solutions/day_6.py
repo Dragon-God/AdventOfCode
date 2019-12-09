@@ -3,7 +3,7 @@ import os
 
 os.chdir(r"2019\Solutions")
 
-with open(r"../Inputs/day_6.txt") as file:
+with open(r"..\Inputs\day_6.txt") as file:
     input_stream = (tuple(tpl.rstrip().split(")")) for tpl in file.readlines())
 
 

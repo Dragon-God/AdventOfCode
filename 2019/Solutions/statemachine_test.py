@@ -3,7 +3,7 @@ os.chdir(r"Advent of Code\2019\Solutions")
 
 from statemachine import StateMachine, operators
 
-with open(r"../Inputs/day_5.txt") as file:
+with open(r"..\Inputs\day_5.txt") as file:
     program = [int(i) for i in file.read().split(",")]
 
 machine = StateMachine(operators, program)

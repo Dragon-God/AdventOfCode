@@ -96,7 +96,7 @@ ___
 ```python
 from itertools import combinations
 
-with open(r"../Inputs/day_2.txt") as file:
+with open(r"..\Inputs\day_2.txt") as file:
     lst = [int(i) for i in file.read().split(",")]
 
 test = lst[:]

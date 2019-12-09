@@ -3,7 +3,7 @@ import os
 
 os.chdir(r"2019\Solutions")
 
-with open(r"../Inputs/day_1.txt") as file:
+with open(r"..\Inputs\day_1.txt") as file:
     input_list = [int(mass) for mass in file.readlines()]
 
 def f(mass):
