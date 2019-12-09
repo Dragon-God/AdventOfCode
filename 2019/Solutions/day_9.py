@@ -1,23 +1,24 @@
 import os
-os.chdir(r"2019\Solutions")
 
 from statemachine import StateMachine, operators
 
-with open(r"..\Inputs\day_5.txt") as file:
+os.chdir(r"2019\Solutions")
+
+with open(r"..\Inputs\day_9.txt") as file:
     program = [int(i) for i in file.read().split(",")]
 
 machine = StateMachine(operators, program)
 
+
 def part_one():
+    machine.send([1])
     return list(machine.run()).pop()
 
 
 def part_two():
+    machine.send([2])
     return list(machine.run()).pop()
 
-print(len(machine._memory))
 
-machine.send([1])
-print(part_one())  # 11049715
-machine.send([5])
-print(part_two())  # 2140710
+print(part_one())  # 3280416268
+print(part_two())  # 80210

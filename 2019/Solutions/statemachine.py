@@ -15,13 +15,14 @@ class Operator:
 
 
 def modify(func=lambda x: x):
-    def wrapper(*args, memory, mode, base=0, **kwargs):
+    def wrapper(*args, memory, mode, base, **kwargs):
         args = list(args)
-        for i in range(len(args)):
-            if mode[i] == 0:
-                args[i] = memory[args[i]]
-            elif mode[i] == 2:
-                args[i] = memory[base + args[i]]
+        for idx, arg in enumerate(args):
+            mod = mode.popleft()
+            if mod == 0:
+                args[idx] = memory[arg]
+            elif mod == 2:
+                args[idx] = memory[base + arg]
         if "input_" in kwargs:
             args = [kwargs["input_"]] + args
 
@@ -29,7 +30,10 @@ def modify(func=lambda x: x):
         if result is not None:
             result = int(result)
         if "store" in kwargs:
-            memory[kwargs["store"]] = result
+            if mode and mode.popleft() == 2:
+                memory[base + kwargs["store"]] = result
+            else:
+                memory[kwargs["store"]] = result
         else:
             return result
     return wrapper
@@ -50,7 +54,7 @@ operators = {
 
 
 class StateMachine:
-    def __init__(self, operators, program, size=10000):
+    def __init__(self, operators, program, size=16384):
         self.__operators = operators
         self.__program = program
         self._pln = len(self.__program)
@@ -60,7 +64,7 @@ class StateMachine:
         self.inputs = deque()
 
     def mode(self, num="000"):
-        return [int(x) for x in num.rjust(3, "0")[::-1]]
+        return deque([int(x) for x in num.rjust(3, "0")[::-1]])
 
     def parse(self, pos):
         val = str(self._memory[pos])
@@ -101,10 +105,10 @@ class StateMachine:
                     kwargs["input_"] = self.inputs.popleft()
 
             result = op_(*args, memory=self._memory,
-                         mode=mod, base=base, **kwargs)
+                         mode=mod, base=base, code=op_.code, **kwargs)
 
             if op_.code == 9:
-                base = result
+                base += result
             elif op_.code == 4:
                yield result
 
