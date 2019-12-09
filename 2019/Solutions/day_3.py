@@ -1,8 +1,12 @@
+import os
+
+os.chdir(r"2019\Solutions")
+
 with open(r"..\Inputs\day_3.txt") as file:
     wires = [line.rstrip().split(",") for line in file.readlines()]
 
 
-def dist(p1: tuple, p2=(0, 0): tuple) -> int:
+def dist(p1: tuple, p2: tuple = (0, 0)) -> int:
     """Calculates the Manhattan distance between two points"""
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
 
@@ -84,3 +88,7 @@ def part_one() -> int:
 def part_two() -> int:
     """Finds minimum distance travelled by the two wires to reach an intersection point."""
     return min(sum(pair) for pair in reaches(wires).values())
+
+
+print(part_one())  # 627
+print(part_two())  # 13190

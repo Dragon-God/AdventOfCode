@@ -27,3 +27,7 @@ def part_one():
 
 def part_two():
     return solve(bounds, rules[::2])
+
+
+print(part_one())  # 960
+print(part_two())  # 626
