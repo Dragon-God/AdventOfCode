@@ -1,1 +1,1 @@
-python, performance, algorithm, programming-challenge,
+python, algorithm, programming-challenge,
