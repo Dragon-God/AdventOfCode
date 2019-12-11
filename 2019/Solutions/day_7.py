@@ -27,7 +27,7 @@ def chained_amplify(init, program, lower, upper):
     for tpl in perm(range(lower, upper)):
         output = init
         amps = cycle([machine.run(False) for machine in machines])
-        for idx, (signal, machine) in enumerate(zip(tpl, machines)):
+        for signal, machine in zip(tpl, machines):
             machine.send([signal])
         machine_cycle = cycle([machine for machine in machines])
         for amp, machine in zip(amps, machine_cycle):

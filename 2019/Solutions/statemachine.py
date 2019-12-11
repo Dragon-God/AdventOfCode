@@ -1,5 +1,6 @@
 import operator as op
 from collections import deque
+from collections import defaultdict
 
 __all__ = ["StateMachine", "operators"]
 
@@ -54,13 +55,11 @@ operators = {
 
 
 class StateMachine:
-    def __init__(self, operators, program, size=16384):
+    def __init__(self, operators, program):
         self.__operators = operators
         self.__program = program
-        self._pln = len(self.__program)
-        self._size = size
-        self._blank = [0] * (self._size-self._pln)
-        self._memory = self.__program[:] + self._blank
+        self._memory = defaultdict(lambda x: 0, ((idx, val)
+                                                 for idx, val in enumerate(self.__program)))
         self.inputs = deque()
 
     def mode(self, num="000"):
@@ -77,7 +76,8 @@ class StateMachine:
         return op_, mod
 
     def reset(self):
-        self._memory = self.__program[:] + self._blank
+        self._memory = defaultdict(lambda x: 0, ((idx, val)
+                                                 for idx, val in enumerate(self.__program)))
         self.inputs = deque()
 
     def send(self, data):
@@ -93,7 +93,7 @@ class StateMachine:
                     self.reset()
                 break
             next_pos = pos + op_.param_length + 1
-            args = self._memory[pos+1:next_pos]
+            args = [self._memory[idx] for idx in range(pos+1, next_pos)]
             kwargs = {}
             stores = {1, 2, 3, 7, 8}
             jumps = {5, 6}
@@ -118,4 +118,6 @@ class StateMachine:
                 pos = next_pos
 
     def state_test(self):
-        return self._memory == self.__program[:] + self._blank
+        return self._memory == defaultdict(lambda x: 0, ((idx, val)
+                                                         for idx, val in enumerate(self.__program))) \
+            and self.inputs == deque()
