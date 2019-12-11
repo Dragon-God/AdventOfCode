@@ -11,12 +11,12 @@ machine = StateMachine(operators, program)
 
 
 def part_one():
-    machine.send([1])
+    machine.send(1)
     return list(machine.run()).pop()
 
 
 def part_two():
-    machine.send([2])
+    machine.send(2)
     return list(machine.run()).pop()
 
 

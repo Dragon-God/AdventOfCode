@@ -80,7 +80,7 @@ class StateMachine:
                                                  for idx, val in enumerate(self.__program)))
         self.inputs = deque()
 
-    def send(self, data):
+    def send(self, *data):
         self.inputs.extend(data)
 
     def run(self, reset=True):
@@ -105,7 +105,7 @@ class StateMachine:
                     kwargs["input_"] = self.inputs.popleft()
 
             result = op_(*args, memory=self._memory,
-                         mode=mod, base=base, code=op_.code, **kwargs)
+                         mode=mod, base=base, **kwargs)
 
             if op_.code == 9:
                 base += result

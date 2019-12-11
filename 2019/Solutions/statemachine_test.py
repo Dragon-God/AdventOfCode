@@ -13,12 +13,12 @@ machine_5 = StateMachine(operators, program_5)
 
 
 def five_part_one():
-    machine_5.send([1])
+    machine_5.send(1)
     return list(machine_5.run()).pop()
 
 
 def five_part_two():
-    machine_5.send([5])
+    machine_5.send(5)
     return list(machine_5.run()).pop()
 
 
@@ -31,7 +31,7 @@ def amplify(init, program, num):
     for tpl in perm(range(num)):
         output = init
         for signal in tpl:
-            machine.send([signal, output])
+            machine.send(signal, output)
             output = next(machine.run())
             machine.reset()
         yield output
@@ -44,11 +44,11 @@ def chained_amplify(init, program, lower, upper):
         output = init
         amps = cycle([machine.run(False) for machine in machines])
         for signal, machine in zip(tpl, machines):
-            machine.send([signal])
+            machine.send(signal)
         machine_cycle = cycle([machine for machine in machines])
         for amp, machine in zip(amps, machine_cycle):
             try:
-                machine.send([output])
+                machine.send(output)
                 output = next(amp)
             except StopIteration:
                 break
@@ -71,12 +71,12 @@ machine = StateMachine(operators, program_9)
 
 
 def nine_part_one():
-    machine.send([1])
+    machine.send(1)
     return list(machine.run()).pop()
 
 
 def nine_part_two():
-    machine.send([2])
+    machine.send(2)
     return list(machine.run()).pop()
 
 

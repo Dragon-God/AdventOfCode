@@ -15,7 +15,7 @@ def amplify(init, program, num):
     for tpl in perm(range(num)):
         output = init
         for signal in tpl:
-            machine.send([signal, output])
+            machine.send(signal, output)
             output = next(machine.run())
             machine.reset()
         yield output
@@ -28,11 +28,11 @@ def chained_amplify(init, program, lower, upper):
         output = init
         amps = cycle([machine.run(False) for machine in machines])
         for signal, machine in zip(tpl, machines):
-            machine.send([signal])
+            machine.send(signal)
         machine_cycle = cycle([machine for machine in machines])
         for amp, machine in zip(amps, machine_cycle):
             try:
-                machine.send([output])
+                machine.send(output)
                 output = next(amp)
             except StopIteration:
                 break
