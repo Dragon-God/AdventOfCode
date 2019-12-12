@@ -12,7 +12,7 @@ with open(r"..\Inputs\day_10.txt") as file:
     grid = np.array([[1 if x == "#" else 0 for x in line]
                      for line in file.readlines()]).transpose()
 
-x_length, y_length = grid.shape
+x_length, y_length = grid.shape  # pylint: disable=w0633
 asteroids = [(x, y) for x in range(x_length)
              for y in range(y_length) if grid[x, y] == 1]
 
