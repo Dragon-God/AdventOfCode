@@ -58,8 +58,8 @@ class StateMachine:
     def __init__(self, operators, program):
         self.__operators = operators
         self.__program = program
-        self._memory = defaultdict(lambda x: 0, ((idx, val)
-                                                 for idx, val in enumerate(self.__program)))
+        self._memory = defaultdict(lambda: 0, ((idx, val)
+                                               for idx, val in enumerate(self.__program)))
         self.inputs = deque()
 
     def mode(self, num="000"):
